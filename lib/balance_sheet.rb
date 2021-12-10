@@ -1,5 +1,5 @@
-require_relative '../entities'
+require_relative './entities'
 
-module BalanceSheet 
+module BalanceSheet
   # ...
 end
