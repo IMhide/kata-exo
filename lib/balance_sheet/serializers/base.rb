@@ -18,7 +18,6 @@ module BalanceSheet
 
         emissions.keys.each_with_object({}) do |key, value|
           category = categories.find { |cat| cat.id == key }
-          emissions.delete(:category_id)
           value[category.name] = {
             total_value: sum_emissions(emissions[key]),
             emissions: emissions[key].map { |e| e.except(:category_id) }
@@ -30,20 +29,8 @@ module BalanceSheet
         @dataset.select do |datum|
           datum.instance_of?(BalanceSheet::Entities::ActivityDatum) && datum.site_id == site_id
         end.map do |datum|
-          factor = find_factor(datum.factor_id)
-          {
-            id: factor.id,
-            description: factor.description,
-            unit: "kgCO2e/#{factor.full_unit}",
-            total_value: factor.total_value(datum.qty1, datum.qty2),
-            value_co2: factor.total_co2(datum.qty1, datum.qty2),
-            value_ch4: factor.total_ch4(datum.qty1, datum.qty2),
-            value_n2o: factor.total_n2o(datum.qty1, datum.qty2),
-            value_co2b: factor.total_co2b(datum.qty1, datum.qty2),
-            value_ch4b: factor.total_ch4b(datum.qty1, datum.qty2),
-            activity_datum_id: datum.id,
-            category_id: factor.category_id
-          }
+          find_factor(datum.factor_id).balance_sheet_format(datum.qty1,
+                                                            datum.qty2).merge({ activity_datum_id: datum.id })
         end
       end
 

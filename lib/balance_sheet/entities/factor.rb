@@ -42,6 +42,21 @@ module BalanceSheet
 
         ch4b * (qty1 || 1) * (qty2 || 1)
       end
+
+      def balance_sheet_format(qty1, qty2)
+        {
+          id: id,
+          description: description,
+          unit: "kgCO2e/#{full_unit}",
+          total_value: total_value(qty1, qty2),
+          value_co2: total_co2(qty1, qty2),
+          value_ch4: total_ch4(qty1, qty2),
+          value_n2o: total_n2o(qty1, qty2),
+          value_co2b: total_co2b(qty1, qty2),
+          value_ch4b: total_ch4b(qty1, qty2),
+          category_id: category_id
+        }
+      end
     end
   end
 end
