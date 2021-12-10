@@ -26,11 +26,15 @@ module BalanceSheet
       end
 
       def activity_for(site_id:)
+        find_activity_data_for(site_id: site_id).map do |datum|
+          find_factor(datum.factor_id).balance_sheet_format(datum.qty1, datum.qty2)
+                                      .merge({ activity_datum_id: datum.id })
+        end
+      end
+
+      def find_activity_data_for(site_id:)
         @dataset.select do |datum|
           datum.instance_of?(BalanceSheet::Entities::ActivityDatum) && datum.site_id == site_id
-        end.map do |datum|
-          find_factor(datum.factor_id).balance_sheet_format(datum.qty1,
-                                                            datum.qty2).merge({ activity_datum_id: datum.id })
         end
       end
 

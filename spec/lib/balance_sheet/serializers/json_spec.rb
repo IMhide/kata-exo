@@ -1,8 +1,4 @@
 describe BalanceSheet::Serializers::Json do
-  it 'is a class' do
-    expect(described_class).to be_a Class
-  end
-
   context '.call' do
     subject { described_class.new(dataset: dataset).call }
     let(:dataset) do

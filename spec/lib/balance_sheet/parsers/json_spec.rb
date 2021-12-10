@@ -1,8 +1,4 @@
 describe BalanceSheet::Parsers::Json do
-  it 'is a class' do
-    expect(described_class).to be_a Class
-  end
-
   context '.call' do
     subject { described_class.new(input_path: input_path).call }
     let(:input_path) { 'data/test.json' }
