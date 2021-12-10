@@ -11,7 +11,7 @@ Bundler.require(:default)
 # Require all the module you're creating here
 #
 
-require_relative "./lib/mod"
+require_relative "./lib/balance_sheet"
 
 #
 # v  Write your main loop downhere v
