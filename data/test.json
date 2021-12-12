@@ -1,11 +1,11 @@
 {
   "emission_categories": [
-    { "id": 1, "name": "énergie" }
+    { "id": 1, "name": "energie" }
   ],
   "emission_factors": [
     {
       "id": 1,
-      "description": "mix électrique moyen",
+      "description": "mix electrique moyen",
       "emission_categorie_id": 1,
       "unit_1": "kWh",
       "unit_2": null,
@@ -28,7 +28,7 @@
   "sites": [
     {
       "id": 1,
-      "name": "entrepôt - Limoges"
+      "name": "entrepot - Limoges"
     }
   ]
 }
